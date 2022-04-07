@@ -1,4 +1,4 @@
-{{ define "index/form.html" }}
+{{ define "todo/form.html" }}
 
 {{ template "globals/header.html" .}}
 <form id="create_todo" action="{{if .ID}}/edit{{else}}/add{{end}}" method="post" enctype="multipart/form-data">

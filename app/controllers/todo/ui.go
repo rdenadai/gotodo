@@ -14,11 +14,11 @@ func RenderHomePage(c *gin.Context) {
 	var todos []models.Todo
 	database.DB.Find(&todos)
 
-	c.HTML(http.StatusOK, "index/index.html", todos)
+	c.HTML(http.StatusOK, "todo/index.html", todos)
 }
 
 func RenderAddPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "index/form.html", nil)
+	c.HTML(http.StatusOK, "todo/form.html", nil)
 }
 
 func RenderEditPage(c *gin.Context) {
@@ -27,7 +27,7 @@ func RenderEditPage(c *gin.Context) {
 	var todo models.Todo
 	database.DB.First(&todo, id)
 
-	c.HTML(http.StatusOK, "index/form.html", todo)
+	c.HTML(http.StatusOK, "todo/form.html", todo)
 }
 
 func ExecuteAddPage(c *gin.Context) {

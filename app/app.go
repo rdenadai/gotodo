@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rdenadai/gotodo/app/controllers"
+	todo "github.com/rdenadai/gotodo/app/controllers/todo"
 )
 
 func StartServer() {
@@ -10,18 +10,18 @@ func StartServer() {
 	r.LoadHTMLGlob("app/templates/**/*.html")
 
 	// API
-	r.GET("/api/v1/todos", controllers.ListAllTodo)
-	r.GET("/api/v1/todos/:id", controllers.ListTodo)
-	r.POST("/api/v1/todos", controllers.CreateTodo)
-	r.PATCH("/api/v1/todos/:id", controllers.EditTodo)
-	r.DELETE("/api/v1/todos/:id", controllers.DeleteTodo)
+	r.GET("/api/v1/todos", todo.ListAllTodo)
+	r.GET("/api/v1/todos/:id", todo.ListTodo)
+	r.POST("/api/v1/todos", todo.CreateTodo)
+	r.PATCH("/api/v1/todos/:id", todo.EditTodo)
+	r.DELETE("/api/v1/todos/:id", todo.DeleteTodo)
 
-	// Templates
-	r.GET("/", controllers.RenderHomePage)
-	r.GET("/add", controllers.RenderAddPage)
-	r.POST("/add", controllers.ExecuteAddPage)
-	r.GET("/edit/:id", controllers.RenderEditPage)
-	r.POST("/edit", controllers.ExecuteEditPage)
+	// UI
+	r.GET("/", todo.RenderHomePage)
+	r.GET("/add", todo.RenderAddPage)
+	r.POST("/add", todo.ExecuteAddPage)
+	r.GET("/edit/:id", todo.RenderEditPage)
+	r.POST("/edit", todo.ExecuteEditPage)
 
 	// Execute
 	r.Run()
