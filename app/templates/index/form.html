@@ -1,0 +1,25 @@
+{{ define "index/form.html" }}
+
+{{ template "globals/header.html" .}}
+<form id="create_todo" action="{{if .ID}}/edit{{else}}/add{{end}}" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="id" name="ID" value={{.ID}}>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" class="form-control" name="Title" value={{.Title}}>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" id="description" class="form-control" name="Description" value={{.Description}}>
+    </div>
+    <div><button type="submit" class="btn btn-success">Save</button></div>
+</form>
+
+<script>
+    document.getElementById("create_todo").addEventListener("submit", function(event) {
+        // event.preventDefault();
+        return true;
+    });
+</script>
+{{ template "globals/footer.html" .}}
+
+{{ end }}

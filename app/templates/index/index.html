@@ -1,0 +1,70 @@
+{{ define "index/index.html" }}
+
+{{ template "globals/header.html" .}}
+<br />
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Done</th>
+            <th scope="col" width="160px">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .}}
+        <tr>
+            <th scope="row">{{.ID}}</th>
+            <td>{{.Title}}</td>
+            <td>{{.Description}}</td>
+            <td>{{.CreatedAt}}</td>
+            <td align="center">
+                {{if .Done}}
+                    <i class="bi bi-bookmark-check-fill" style="color: green; font-size: 1.5em; cursor: pointer;" onclick="done_todo('{{.ID}}', false);"></i>
+                {{else}}
+                    <i class="bi bi-bookmark-dash" style="color: red; font-size: 1.5em; cursor: pointer;" onclick="done_todo('{{.ID}}', true);"></i>
+                {{end}}
+            </td>
+            <td align="center" >
+                <button type="button" class="btn btn-primary" onclick="edit_todo('{{.ID}}');">Edit</button>
+                <button type="button" class="btn btn-danger" onclick="delete_todo('{{.ID}}');">Delete</button>
+            </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+
+<div><button id="create_todo" type="button" class="btn btn-success" onclick="create_todo();">Create</button></div>
+<script>
+    function create_todo() {
+        window.location = "/add";
+    }
+
+    function edit_todo(id) {
+        window.location = "/edit/" + id;
+    }
+
+    function done_todo(id, done) {
+        axios({
+            method: "patch",
+            url: "/api/v1/todos/" + id,
+            data: {
+                "Done": done
+            }
+        });
+        window.location = "/";
+    }
+
+    function delete_todo(id) {
+        axios({
+            method: "delete",
+            url: "/api/v1/todos/" + id,
+        });
+        window.location = "/";
+    }
+</script>
+{{ template "globals/footer.html" .}}
+
+{{ end }}
