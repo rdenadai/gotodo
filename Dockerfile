@@ -1,11 +1,11 @@
-FROM golang:1.18.0-stretch
+FROM golang:1.18.1-alpine3.15
 
 WORKDIR /app
 
 COPY ./ .
 
-RUN apt update -y && \
-    apt-get install -y gcc && \
+RUN apk update && \
+    apk add build-base git && \
     go build .
 
 EXPOSE 8080

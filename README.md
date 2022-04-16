@@ -11,6 +11,12 @@ $> docker build -t gotodo .
 $> docker run -d -p 80:8080 --name gotodo gotodo
 ```
 
-After that ... just head to your browser ... and enjoy a simple and dummy ToDo.
+Or, the simplest way ...
+
+```bash
+$> docker-compose -f stack.yml up
+```
+
+After that ... just head to your browser (http://localhost) ... and enjoy a simple and dummy ToDo.
 
 Cheers! ;)

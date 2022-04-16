@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  postgresql-master:
+  postgresql:
     image: 'bitnami/postgresql:latest'
+    hostname: postgresql
     ports:
       - '5432:5432'
     volumes:
@@ -11,6 +12,13 @@ services:
       - POSTGRESQL_USERNAME=rdenadai
       - POSTGRESQL_PASSWORD=rdenadai
       - POSTGRESQL_DATABASE=gotodo
+  gotodo:
+    build: .
+    hostname: api
+    container_name: api
+    restart: unless-stopped
+    ports:
+      - "80:8080"
 
 volumes:
   postgresql_master_data:
